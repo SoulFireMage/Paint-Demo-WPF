@@ -8,6 +8,12 @@ using System.Windows.Media.Imaging;
 
 namespace Painter
 {
+    /// <summary>
+    /// Simple file formats handling, here I wanted the simplest interface I could for the main window class to have the ability to save from or two
+    /// a variety of formats. Right now, saving to jpg/png and xaml is support, reading from jpg/png is mostly function.
+    /// Lots of rough edges as it's the simplest tutoring project possible that would have enough interest to cover a wide variety of C# and WPF.
+    /// </summary>
+    
     public static class FileExports
     {
         
@@ -22,7 +28,7 @@ namespace Painter
                     break;
                 case 2: ExportToPng(new Uri(filename), new JpegBitmapEncoder());
                     break;
-                case 3: SerializeToXML( filename);
+                case 3: SerializeToXml( filename);
                     break;
             }
         }
@@ -46,6 +52,7 @@ namespace Painter
         private static void OpenXML(string filename)
         {
             var mystrXAML = XamlReader.Load(new FileStream(filename,FileMode.Open));
+            //Not yet functional!
             surface.DataContext = mystrXAML;
         }
 
@@ -56,7 +63,7 @@ namespace Painter
             
             surface.Background = brush;
         }
-        private static void SerializeToXML( string  filename  )
+        private static void SerializeToXml( string  filename  )
         {
             string mystrXAML = XamlWriter.Save(surface);
             FileStream filestream = File.Create(filename);

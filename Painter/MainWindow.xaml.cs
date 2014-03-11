@@ -50,26 +50,11 @@ namespace Painter
             InkCanvas.Children.Add(_lines);
          }
          
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-        //This is cheating, I'm casting an object to a Button to access it's background colour.
-            //Quick n dirty basically as casts never feel right to me.
-            Button btn = (Button) sender;
-            var solidColorBrush = btn.Background as SolidColorBrush;
-            if (solidColorBrush != null)
-            {
-                inkAttributes.Color = solidColorBrush.Color;
-            }
-            InkCanvas.DefaultDrawingAttributes = inkAttributes;
-        }
-
- 
-        private void SaveCmdExecuted(object sender, ExecutedRoutedEventArgs e)
+      private void SaveCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var saveFile = new SaveFileDialog {Filter = "JPG Image|*.jpg|PNG|*.png|XAML Data|*.xaml"};
            if (saveFile.ShowDialog() == true) InkCanvas.ExportFile(saveFile.FileName, saveFile.FilterIndex);
          }
-
         
         private void SaveCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

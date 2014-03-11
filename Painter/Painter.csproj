@@ -62,7 +62,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="dbConnect.cs" />
     <Compile Include="Expressions.cs" />
     <Compile Include="FileExports.cs" />
     <Compile Include="MainWindow.xaml.cs">
