@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
  
 
 // Note to Daniel - Get yourself a trial of Resharper as well as visual studio 2013 pro 
-using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace Painter
@@ -38,7 +31,7 @@ namespace Painter
             _lines.Stroke = _color;
             _lines.StrokeThickness = 1.0;
             InkCanvas.Children.Add(_lines);
-           
+          
         }
 
         private void Canvas_OnMouseMove(object sender, MouseEventArgs e)
@@ -49,18 +42,14 @@ namespace Painter
               
                 _lines.Points.Add(Mouse.GetPosition(InkCanvas));
             }
-            
         }
 
         private void Canvas_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             _lines = new Polyline {Stroke = _color};
             InkCanvas.Children.Add(_lines);
-           
-        }
-        
-        
-
+         }
+         
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
         //This is cheating, I'm casting an object to a Button to access it's background colour.
@@ -78,9 +67,8 @@ namespace Painter
         private void SaveCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var saveFile = new SaveFileDialog {Filter = "JPG Image|*.jpg|PNG|*.png|XAML Data|*.xaml"};
-            //can I simply send to Canvas.SaveFile(requiredFormatString?)
-            if (saveFile.ShowDialog() == true) InkCanvas.ExportFile(saveFile.FileName, saveFile.FilterIndex);
-            }
+           if (saveFile.ShowDialog() == true) InkCanvas.ExportFile(saveFile.FileName, saveFile.FilterIndex);
+         }
 
         
         private void SaveCmdCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -114,12 +102,8 @@ namespace Painter
                         inkAttributes.Color = col.Color;
                 }
             }
-            
-            //var solidColorBrush = btn.Background as SolidColorBrush;
-            //if (solidColorBrush != null)
-            //{
-            //    inkAttributes.Color = solidColorBrush.Color;
-            //}
+           
+       
             InkCanvas.DefaultDrawingAttributes = inkAttributes;
         }
       
