@@ -1,0 +1,89 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+     
+
+    <Style TargetType="ListBox">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF114F64" Offset="0"/>
+                    <GradientStop Color="#FF2DC3F5" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--Credit for this and the listbox starting point belongs to: http://stuff.seans.com/2011/02/14/creating-a-listbox-that-shows-all-predefined-wpf-colors/ -->
+    
+    <ObjectDataProvider MethodName="GetType"
+        ObjectType="{x:Type sys:Type}" x:Key="colorsTypeOdp">
+        <ObjectDataProvider.MethodParameters>
+            <sys:String>System.Windows.Media.Colors, PresentationCore,
+                Version=3.0.0.0, Culture=neutral,
+                PublicKeyToken=31bf3856ad364e35</sys:String>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    
+    <ObjectDataProvider 
+    ObjectInstance="{x:Type Colors}" 
+    MethodName="GetProperties" 
+    x:Key="colorPropertiesOdp" />
+<!-- end 3rd party -->
+    
+    <Style TargetType="InkCanvas">
+        <Setter Property="Effect" >
+            <Setter.Value>
+                <DropShadowEffect/>
+            </Setter.Value>
+           </Setter>
+
+        <Setter Property="Margin" Value="4"/>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect/>
+            </Setter.Value>
+        
+        </Setter>
+        <Setter Property="Margin">
+            <Setter.Value>
+                <![CDATA[4]]>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Menu">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect/>
+            </Setter.Value>
+
+        </Setter>
+        <Setter Property="Margin">
+            <Setter.Value>
+                <![CDATA[4]]>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Grid">
+        
+        <Setter Property="Background">
+            <Setter.Value>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+            </Setter.Value>
+            
+        </Setter>
+    </Style>
+   
+</ResourceDictionary>
