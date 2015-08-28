@@ -4,7 +4,8 @@
 //using System.Linq;
 //using System.Linq.Expressions;
 //using System.Reflection;
-
+//THIS HAS NOTHING TO DO WITH THE PAINTER APPLICATION! IT GOT PULLED INTO THE PROJECT
+//DUE TO RUSHING ABOUT TRYING TO SAVE STUFF?
 //namespace Painter
 //{
  
