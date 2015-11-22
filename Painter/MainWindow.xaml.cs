@@ -1,25 +1,63 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
- 
-
-// Note to Daniel - Get yourself a trial of Resharper as well as visual studio 2013 pro 
+  
 using Microsoft.Win32;
 
 namespace Painter
+   
+    
 {
+    //dreaded utility, take comfort in the fact it's just a drill project
+    public static class utility
+    {
+        public static IEnumerable<int> RangeWithStep(this  int start, int end, int step)
+        {
+          
+            for (int i = start; i <= end; i += step)
+                {
+                yield return i;
+                }
+             
+            }
+        }
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Demo painter project . Please note, performance is dire on wpf canvas past a few thousand objects :)
     /// </summary>
     public partial class MainWindow
     {
+        private ObservableCollection<double> _items = new ObservableCollection<double>();
+
+        public ObservableCollection<double> Items
+        {
+            get { return _items; }
+            set { _items = value; }
+        }
         public MainWindow()
         {
             InitializeComponent();
+            
+            DataContext = this;
+            1.RangeWithStep(10,1).ToList().ForEach(x => Items.Add((double) x / 10));
+            10.RangeWithStep(5000, 50).ToList().ForEach(x => Items.Add((double) x)) ;
+            this.SizeValue.ItemsSource = Items;
+        
+            this.ThicknessValue.ItemsSource = Items;
+        
+
         }
+
+       
+
         // Have a brush type state, instead. 
         private Polyline _lines = new Polyline();
         //Event - generates by entering in Xaml OnMouseDown="Canvans_OnMouseDown" 
@@ -87,11 +125,39 @@ namespace Painter
                         inkAttributes.Color = col.Color;
                 }
             }
-           
-       
+            
             InkCanvas.DefaultDrawingAttributes = inkAttributes;
         }
-      
+        
+        private void stuff_changed(object sender, RoutedEventArgs e)
+        {
+            //caught this gap in reasoning! I'd said != null or != null which means run if either is not null.
+            if (SizeValue.SelectedValue != null && ThicknessValue.SelectedValue != null)  { 
+            circle();
+                }
+            }
+
+        private void circle()
+        {
+            Random r = new Random();
+            var c = inkAttributes.Color  ;
+            drawingStuff.circle(InkCanvas, new Point(600,400) , (double)SizeValue.SelectedValue, (double) ThicknessValue.SelectedValue,c)  ;
+            }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+ 
+
+        }
+
+
+        private void ComboBoxLoaded(object sender, RoutedEventArgs e)
+        {
+            ThicknessValue.SelectedIndex = 5;
+            SizeValue.SelectedIndex = 9;
+            
+            }
     }
     
 
